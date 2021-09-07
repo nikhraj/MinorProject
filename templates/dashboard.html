@@ -373,15 +373,15 @@
         });
     </script>
     <script>
-            var m1 = {"data":[],"labels":[]};
+            var m1 = {"data":[40,12,15,10,4,2],"labels":["800","1200","1400","1500","1600","1700"]};
             var ctx1 = document.getElementById('chart1').getContext('2d');
             var chart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
-                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    labels: m1.labels,
                     datasets: [{
                         label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
+                        data: m1.data,
                         backgroundColor: [
                             'rgba(255, 99, 132, 0.2)',
                             'rgba(54, 162, 235, 0.2)',
