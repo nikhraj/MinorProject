@@ -165,8 +165,8 @@
       </div>
 
       <div class="right menu">
-        <a href="#" class="item">
-          <i class="bell icon"></i>
+        <a href="https://github.com/nikhraj/MinorProject" class="item">
+          <i class="github icon"></i>
           Github repo
         </a>
        
@@ -184,23 +184,23 @@
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header red">
-                  <i class="icon shopping cart"></i>
+                  <i class="icon file code"></i>
                 </div>
                 <div class="header">
                   <div class="ui red header">
                     3958
                   </div>
                 </div>
-                <div class="meta">
-                  orders
-                </div>
+                <!-- <div class="meta">
+                  problems
+                </div> -->
                 <div class="description">
-                  Elliot requested permission to view your contact details
+                  Total problems solved by user
                 </div>
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui red button">More Info</div>
+                  <div class="ui red button">No of Problems</div>
                 </div>
               </div>
             </div>
@@ -211,21 +211,21 @@
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header green">
-                  <i class="icon clock"></i>
+                  <i class="icon list ul"></i>
                 </div>
                 <div class="header">
-                  <div class="ui header green">57.6%</div>
+                  <div class="ui header green">42</div>
                 </div>
-                <div class="meta">
-                  Time
-                </div>
+                <!-- <div class="meta">
+                  Contests
+                </div> -->
                 <div class="description">
-                  Elliot requested permission to view your contact details
+                  Total contests given by user
                 </div>
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui green button">More Info</div>
+                  <div class="ui green button">No of Contests</div>
                 </div>
               </div>
             </div>
@@ -236,21 +236,21 @@
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header teal">
-                  <i class="icon briefcase"></i>
+                  <i class="icon trophy"></i>
                 </div>
                 <div class="header">
-                  <div class="ui teal header">3112</div>
+                  <div class="ui teal header">500</div>
                 </div>
-                <div class="meta">
-                  Saves
-                </div>
+                <!-- <div class="meta">
+                  Rank
+                </div> -->
                 <div class="description">
-                  Elliot requested permission to view your contact details
+                    Best rank of the user
                 </div>
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui teal button">More Info</div>
+                  <div class="ui teal button">Best Rank</div>
                 </div>
               </div>
             </div>
@@ -261,21 +261,21 @@
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header purple">
-                  <i class="icon trophy"></i>
+                    <i class="angle double down icon"></i>
                 </div>
                 <div class="header">
                   <div class="ui purple header">9805</div>
                 </div>
-                <div class="meta">
-                  Views
-                </div>
+                <!-- <div class="meta">
+                  Rank
+                </div> -->
                 <div class="description">
-                  Elliot requested permission to view your contact details
+                  Worst rank of the user
                 </div>
               </div>
               <div class="extra content">
                 <div class="ui two buttons">
-                  <div class="ui purple button">More Info</div>
+                  <div class="ui purple button">Worst Rank</div>
                 </div>
               </div>
             </div>
@@ -327,7 +327,7 @@
             <div class="eight wide computer sixteen wide phone column justifed">
                 
                 <div class="ui tall stacked segment">
-                    <a class="ui blue ribbon label">Chart.js Bar Chart - Multi Axis</a>
+                    <a class="ui blue ribbon label">Problems based on ratings</a>
                     <canvas id="chart1"></canvas>
                     <div class="ui divider"></div>
                     
@@ -336,7 +336,7 @@
             <div class="eight wide computer sixteen wide phone column justifed">
             
                 <div class="ui tall stacked segment">
-                    <a class="ui blue ribbon label">Chart.js Pie Chart - Examples</a>
+                    <a class="ui blue ribbon label">Problems based on category</a>
                     <canvas id="chart2"></canvas>
                     <div class="ui divider"></div>
                 </div><br>
@@ -373,7 +373,7 @@
         });
     </script>
     <script>
-        
+            var m1 = {"data":[],"labels":[]};
             var ctx1 = document.getElementById('chart1').getContext('2d');
             var chart1 = new Chart(ctx1, {
                 type: 'bar',
@@ -408,6 +408,34 @@
                         }
                     }
                 }
+            });
+            var ctx2 = document.getElementById('chart2').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'pie',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                
             });
     </script>
   </body>
