@@ -14,30 +14,33 @@
     />
   </head>
 <body>
-<div class="ui grid container middle aligned" style="margin-top:auto">
+<div class="ui centered grid container" style="margin-top:7%">
     <div class="nine wide column">
     <div class="ui icon warning message" id="message">
-        <i class="lock icon"></i>
+        <i class="chart line icon"></i>
         <div class="content">
             <div class="header">
-            Login Incomplete
+            Problem recommendation System
             </div>
-            <p>Please enter Hospital ID and Password</p>
+            <p>Please enter your codeforces handle to see stats</p>
         </div>
         </div>
     <div class="ui fluid card">
         <div class="content">
-        <form class="ui form" id="login" method="POST">
+        <form class="ui form" id="cf" method="POST">
         <div class="field">
-            <label>Hospital ID</label>
-            <input type="text" name="hospitalid" placeholder="Hospital ID">
+            <label>Codeforces Handle</label>
+            <input type="text" name="cfhandle" placeholder="CF Handle">
         </div>
-        <div class="field">
-            <label>Password</label>
-            <input type="password" name="pass" placeholder="Password">
-        </div>
+        <div class="ui green message">
+            <div class="header">SoExample Handles</div>
+            <ul class="list">
+              <li>tourist</li>
+              <li>Benq</li>
+            </ul>
+          </div>
          <button class="ui violet primary labeled icon button" type="submit">
-            <i class="paper plane icon" style="background-color: rgba(100, 31, 211, 0.089);"></i>Login
+            <i class="paper plane icon" style="background-color: rgba(100, 31, 211, 0.089);"></i>Submit
          </button>
         </form>
         </div>
