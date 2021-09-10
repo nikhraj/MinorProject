@@ -28,12 +28,13 @@
     <div class="ui fluid card">
         <div class="content">
         <form class="ui form" id="cf" method="POST">
+            {% csrf_token %}
         <div class="field">
             <label>Codeforces Handle</label>
-            <input type="text" name="cfhandle" placeholder="CF Handle">
+            <input type="text" id="cfhandle" name="cfhandle" placeholder="CF Handle">
         </div>
         <div class="ui green message">
-            <div class="header">SoExample Handles</div>
+            <div class="header">Some Example Handles</div>
             <ul class="list">
               <li>tourist</li>
               <li>Benq</li>
@@ -58,5 +59,14 @@
     integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
     crossorigin="anonymous"
 ></script>
+
+<script>
+    $('#cf').submit(function() {
+        var value = $('#cfhandle').val();
+        console.log(value);
+        window.location.replace(value);
+        return false;
+    });
+</script>
 </body>
 </html>
