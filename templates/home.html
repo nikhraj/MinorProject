@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Minor Project</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+      integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
+      crossorigin="anonymous"
+    />
+  </head>
+<body>
+<div class="ui centered grid container">
+    <div class="nine wide column">
+    <div class="ui icon warning message" id="message">
+        <i class="lock icon"></i>
+        <div class="content">
+            <div class="header">
+            Login Incomplete
+            </div>
+            <p>Please enter Hospital ID and Password</p>
+        </div>
+        </div>
+    <div class="ui fluid card">
+        <div class="content">
+        <form class="ui form" id="login" method="POST">
+        <div class="field">
+            <label>Hospital ID</label>
+            <input type="text" name="hospitalid" placeholder="Hospital ID">
+        </div>
+        <div class="field">
+            <label>Password</label>
+            <input type="password" name="pass" placeholder="Password">
+        </div>
+         <button class="ui violet primary labeled icon button" type="submit">
+            <i class="paper plane icon" style="background-color: rgba(100, 31, 211, 0.089);"></i>Login
+         </button>
+        </form>
+        </div>
+    </div>
+</div>
+</div>
+
+<script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
+    integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
+    crossorigin="anonymous"
+></script>
+</body>
+</html>
