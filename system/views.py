@@ -1,5 +1,7 @@
 from django.shortcuts import render
-
+import json
+from json import dumps
+import requests
 # Create your views here.
 
 
@@ -7,4 +9,45 @@ def home_view(request):
     return render(request,'home.html')
 
 def dashboard_view(request,ID):
-    return render(request,'dashboard.html',{'user_id':ID})
+    response_path1 = requests.post('https://codeforces.com/api/user.rating?handle=_MV208_')
+    result1 = json.loads(response_path1.text)
+
+    if result1['status'] == 'FAILED':
+        return render(request,'home.html')
+    contests = result1['result']
+    contests = contests[::-1][0:5]
+    response_path2 = requests.post('https://codeforces.com/api/user.status?handle=_MV208_')
+    result2 = json.loads(response_path2.text)
+    data = result2['result']
+    rating_problems = {}
+    index_problems = {}
+    tags = {}
+    langs = {}
+    for ele in data:
+        if ele['verdict'] == 'OK':
+            index = ele['problem']['index']
+            rating = ele['problem']['rating']
+            this_tags = ele['problem']['tags']
+            lang = ele['programmingLanguage']
+            if  index not in index_problems:
+                index_problems[index[0]]=1
+            else:
+                index_problems[index[0]]+=1
+            
+            if rating not in rating_problems:
+                rating_problems[rating]=1
+            else:
+                rating_problems[rating]+=1
+
+            for tag in this_tags:
+                if tag not in tags:
+                    tags[tag]=1
+                else:
+                    tags[tag]+=1
+            
+            if lang not in langs:
+                langs[lang]=1
+            else:
+                langs[lang]+=1
+
+    return render(request,'dashboard.html',{'contests':dumps(contests),'rating_problems':dumps(rating_problems),'index_problems':dumps(index_problems),'tags':dumps(tags),'langs':dumps(langs)})

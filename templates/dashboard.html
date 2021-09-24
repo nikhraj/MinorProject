@@ -373,10 +373,23 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script> -->
     <script>
-            var m1 = {"data":[40,12,15,10,4,2],"labels":["800","1200","1400","1500","1600","1700"]};
-            var m2 = {"data":[40,12,15,7,4,10],"labels":["greedy","string","dp","graph","tree","constructive"]};
+
+            var indexs = JSON.parse("{{index_problems|escapejs}}");
+            var ratings = JSON.parse("{{rating_problems|escapejs}}");
+            var tags = JSON.parse("{{tags|escapejs}}");
+            var langs = JSON.parse("{{langs|escapejs}}");
+            var contests = JSON.parse("{{contests|escapejs}}");
+            
+            console.log(indexs);  
+            console.log(ratings);  
+            console.log(tags);
+            console.log(langs);
+            console.log(contests);      
+
+            var m1 = {"data":Object.values(ratings),"labels":Object.keys(ratings)};
+            var m2 = {"data":Object.values(tags),"labels":Object.keys(tags)};
             var ctx1 = document.getElementById('chart1').getContext('2d');
             
             var chart1 = new Chart(ctx1, {
@@ -411,6 +424,9 @@
                         y: {
                             beginAtZero: true
                         }
+                    },
+                    plugins:{
+                    legend: { display: false }
                     }
                 }
             });
@@ -443,6 +459,11 @@
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
+                    plugins: {
+                    legend: {
+                        position: 'right',
+                    },
+                  }
                 }
                 
             });
