@@ -6,12 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Minor Project</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css"/>
   </head>
 <body style="background-color: #f1f5f8;">
 <div class="ui centered grid container" style="margin-top:7%">
@@ -49,18 +44,22 @@
 </div>
 </div>
 
-<script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-<script
-    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
-    integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
-    crossorigin="anonymous"
-></script>
-
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js"></script>
 <script>
+    {% if msg %}
+        console.log("Test");
+        $('body')
+    .toast({
+        title: 'Not Found',
+        message: 'Please enter a valid cf handle',
+        displayTime: 5000,
+        showProgress: 'top',
+        classProgress: 'blue',
+        class:'error',
+    });
+    
+    {% endif %}
     $('#cf').submit(function() {
         var value = $('#cfhandle').val();
         console.log(value);

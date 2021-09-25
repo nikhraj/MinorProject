@@ -6,12 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Minor Project</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
-      integrity="sha256-9mbkOfVho3ZPXfM7W8sV2SndrGDuh7wuyLjtsWeTI1Q="
-      crossorigin="anonymous"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.css"/>
 
   
     <style>
@@ -185,7 +180,7 @@
                   <i class="icon file code"></i>
                 </div>
                 <div class="header">
-                  <div class="ui teal header">
+                  <div class="ui teal header" id="noofproblems">
                     3958
                   </div>
                 </div>
@@ -203,16 +198,14 @@
               </div>
             </div>
           </div>
-          <div
-            class="four wide computer eight wide tablet sixteen wide mobile column"
-          >
+          <div class="four wide computer eight wide tablet sixteen wide mobile column">
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header blue">
                   <i class="icon list ul"></i>
                 </div>
                 <div class="header">
-                  <div class="ui header blue">42</div>
+                  <div class="ui header blue" id="noofcontests">42</div>
                 </div>
                 <!-- <div class="meta">
                   Contests
@@ -237,7 +230,7 @@
                   <i class="icon trophy"></i>
                 </div>
                 <div class="header">
-                  <div class="ui green header">500</div>
+                  <div class="ui green header" id="bestrank">500</div>
                 </div>
                 <!-- <div class="meta">
                   Rank
@@ -259,10 +252,10 @@
             <div class="ui fluid card">
               <div class="content">
                 <div class="ui right floated header red">
-                    <i class="angle double down icon"></i>
+                    <i class="arrow alternate circle down"></i>
                 </div>
                 <div class="header">
-                  <div class="ui red header">9805</div>
+                  <div class="ui red header" id="worstrank">9805</div>
                 </div>
                 <!-- <div class="meta">
                   Rank
@@ -288,14 +281,14 @@
                     Contest Name
                   </th>
                   <th>
-                    Rank
+                    Current Rating
                   </th>
                   <th>
-                    Date
+                    Rank
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="contest">
                 <tr>
                   <td>
                     <i class="folder icon"></i> Codeforces Round 626 (Div 2)
@@ -386,16 +379,9 @@
       </div>
     </div>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
-      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"
-      integrity="sha256-t8GepnyPmw9t+foMh3mKNvcorqNHamSKtKRxxpUEgFI="
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js">
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script> -->
     <script>
@@ -419,14 +405,64 @@
               }, 
               {}
             );
-
+            
             var m1 = {"data":Object.values(ratings),"labels":Object.keys(ratings)};
             var m2 = {"data":Object.values(tags),"labels":Object.keys(tags)};
             var m3 = {"data":Object.values(ordered),"labels":Object.keys(ordered)};
             var m4 = {"data":Object.values(langs),"labels":Object.keys(langs)};
-
+            var total_problems = m1.data.reduce((a, b) => a + b, 0);
+            console.log(total_problems);
+            var total_contests = contests.length;
+            console.log(total_contests);
             var ctx1 = document.getElementById('chart1').getContext('2d');
+            var best_rating = 100000;
+            var worst_rating = 0;
+            var contest_details = [];
+
+            for(var i=0;i<total_contests;i++)
+            {
+              var this_object = contests[i];
+              best_rating = Math.min(best_rating,this_object.rank);
+              worst_rating = Math.max(worst_rating,this_object.rank);
+              if((total_contests-i)<=5)
+              {
+                contest_details.push({"name":this_object.contestName,"curr_rating":this_object.newRating,"rank":this_object.rank,"bool":this_object.newRating>this_object.oldRating});
+              }
+            }
+            console.log(contest_details);
+            console.log(best_rating);
+            console.log(worst_rating);
+            var k=``;
+            for(var i=Math.min(4,total_contests-1);i>=0;i--)
+            {
+              var thi = contest_details[i];
+              if(thi.bool)
+              {
+                k+=`<tr>
+                      <td>
+                        <i class="folder icon"></i> ${thi.name}
+                      </td>
+                      <td class="positive"><i class="angle double up green icon"></i>${thi.curr_rating}</td>
+                      <td>${thi.rank}</td>
+                    </tr>`;
+              }
+              else{
+                k+=`<tr>
+                      <td>
+                        <i class="folder icon"></i> ${thi.name}
+                      </td>
+                      <td class="negative"><i class="angle double down red icon"></i>${thi.curr_rating}</td>
+                      <td>${thi.rank}</td>
+                    </tr>`;
+              }
             
+            }
+            document.getElementById("contest").innerHTML = k;
+            document.getElementById("noofproblems").innerHTML = total_problems;
+            document.getElementById("noofcontests").innerHTML = total_contests;
+            document.getElementById("bestrank").innerHTML = best_rating;
+            document.getElementById("worstrank").innerHTML = worst_rating;
+
             var chart1 = new Chart(ctx1, {
                 type: 'bar',
                 data: {
@@ -522,6 +558,11 @@
               options:{
                 responsive: true,
                 maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                    },
+                  }
               }
 
             });

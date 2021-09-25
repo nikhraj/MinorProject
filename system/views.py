@@ -9,14 +9,14 @@ def home_view(request):
     return render(request,'home.html')
 
 def dashboard_view(request,ID):
-    response_path1 = requests.post('https://codeforces.com/api/user.rating?handle=_MV208_')
+    response_path1 = requests.post('https://codeforces.com/api/user.rating?handle='+ID)
     result1 = json.loads(response_path1.text)
 
     if result1['status'] == 'FAILED':
-        return render(request,'home.html')
+        return render(request,'home.html',{'msg':"Please enter a valid handle"})
     contests = result1['result']
-    contests = contests[::-1][0:5]
-    response_path2 = requests.post('https://codeforces.com/api/user.status?handle=_MV208_')
+    # contests = contests[::-1][0:5]
+    response_path2 = requests.post('https://codeforces.com/api/user.status?handle='+ID)
     result2 = json.loads(response_path2.text)
     data = result2['result']
     rating_problems = {}
