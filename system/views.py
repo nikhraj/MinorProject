@@ -25,10 +25,13 @@ def dashboard_view(request,ID):
     langs = {}
     for ele in data:
         if ele['verdict'] == 'OK':
-            index = ele['problem']['index']
-            rating = ele['problem']['rating']
-            this_tags = ele['problem']['tags']
-            lang = ele['programmingLanguage']
+            try:
+                index = ele['problem']['index']
+                rating = ele['problem']['rating']
+                this_tags = ele['problem']['tags']
+                lang = ele['programmingLanguage']
+            except:
+                continue
             if  index not in index_problems:
                 index_problems[index[0]]=1
             else:
