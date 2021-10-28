@@ -20,5 +20,6 @@ from system.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home_view),
+    path('problem/<str:contestid>/<str:index>',problem_opener),
     path('<str:ID>',dashboard_view)
 ]

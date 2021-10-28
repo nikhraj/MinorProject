@@ -264,15 +264,115 @@
                   <div class="ui divider"></div>
               </div><br>
           </div>
+          <div class="eight wide computer sixteen wide phone column justifed">
+            <button class="ui primary button" id="categorybtn">View Weak Categories</button>
+            <div class="ui tiny modal" id="categorymodal">
+              <i class="close icon"></i>
+              <div class="header">
+                Weak Categories
+              </div>
+                <div class="content">
+                  <button class="ui blue basic label" id="dfs">DFS</button>
+                  <button class="ui green basic label" id="bs">Binary Search</button>
+                  <button class="ui violet basic label" id="graph">Graph</button>
+                  <button class="ui orange basic label" id="dp">DP</button>
+                  <button class="ui red basic label" id="bitmasks">BitMasks</button>
+                </div>
+              
+              <div class="actions">
+                <div class="ui cancel button">
+                  Cancel
+                </div>
+                <div class="ui positive right labeled icon button">
+                  Thanks
+                  <i class="checkmark icon"></i>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
 
       </div>
     </div>
 
+<div id="problemsmodal"  class="ui basic modal">
+  <i class="close icon"></i>
+  <div class="content">
+  <table id="problemstable" style="margin:2%!important" class="ui celled table">
+  <thead>
+    <tr>  
+        <th>ProblemName</th>
+        <th>ContestID</th>
+        <th>Index</th>
+        <th>Rating</th>
+        <th>Open</th>
+      </tr>
+    </thead>
+    <tbody id="mydata">
+        <tr>
+            <th colspan="5">
+            <div style="margin:3%" class="ui warning message">
+              <div class="header">
+                  No problems are recommended!
+              </div>
+            </div>
+            </th>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <div class="actions">
+      <div class="ui cancel button">
+        Cancel
+      </div>
+      <div class="ui positive right labeled icon button">
+        Thanks
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+</div>
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.7.8/dist/semantic.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      $('#categorybtn').click(function(){
+            $('#categorymodal').modal('show');
+           
+        });
+      $('.content button').click(function(){
+          var id = this.id;
+          console.log(id);
+          var mainObj = {
+                    dfs:[{problemname:"Divine Array",contestid:"1602",index:"B",rating:"800"},{problemname:"Robot Factory",contestid:"1690",index:"B",rating:"1500"}],
+                    dp:[{problemname:"Two Sorts",contestid:"1601",index:"F",rating:"3400"},{problemname:"Divisible by Twenty-Five",contestid:"1575",index:"D",rating:"1800"}],
+                   // graph:[{problemname:,contestid:,index:,rating:},{problemname:,contestid:,index:,rating:}],
+                   // bs:[{problemname:,contestid:,index:,rating:},{problemname:,contestid:,index:,rating:}],
+                   // bitmasks:[{problemname:,contestid:,index:,rating:},{problemname:,contestid:,index:,rating:}]
+                  };
+          var thisObj = mainObj[id];
+          var k=``;
+          for(var i=0;i<thisObj.length;i++)
+          {
+            
+            var problemname = thisObj[i].problemname;
+            var contestid = thisObj[i].contestid;
+            var index = thisObj[i].index;
+            var rating = thisObj[i].rating;   
+            k+=`<tr class="${i}">
+            <td>${problemname}</td>
+            <td>${contestid}</td>
+            <td>${index}</td>
+            <td>${rating}</td>
+            <td><a class="ui primary button" href="../problem/${contestid}/${index}">Open</button></a>
+            </tr>`
+        }
+        document.getElementById('mydata').innerHTML = k;
+          $('#problemsmodal').modal('show');
+      });
+    </script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-colorschemes"></script> -->
     <script>
 

@@ -8,6 +8,17 @@ import requests
 def home_view(request):
     return render(request,'home.html')
 
+def problem_opener(request,contestid,index):
+    dict = {
+        'fname' : str(contestid)+str(index),
+        'lang' : 'cpp',
+        'src' : '',
+        'contestid': contestid,
+        'problemid' : index
+    } 
+    dataJSON = dumps(dict) 
+    return render(request,'problem_opener.html',{'data':dataJSON})
+
 def dashboard_view(request,ID):
     response_path1 = requests.post('https://codeforces.com/api/user.rating?handle='+ID)
     result1 = json.loads(response_path1.text)
@@ -24,6 +35,14 @@ def dashboard_view(request,ID):
     tags = {}
     langs = {}
     for ele in data:
+        if ele['verdict'] == 'WRONG_ANSWER':
+            try:
+                index1 = ele['problem']['index']
+                rating1 = ele['problem']['rating']
+                this_tags1 = ele['problem']['tags']
+            except:
+                continue
+            
         if ele['verdict'] == 'OK':
             try:
                 index = ele['problem']['index']
